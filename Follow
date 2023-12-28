@@ -1,0 +1,38 @@
+-- Replace 'PLAYER_PLANE_NAME' with the actual name of your player plane
+local playerPlaneName = 'PLAYER_PLANE_NAME'
+
+-- Replace 'AI_CAP_PLANE_NAME' with the actual name of your AI CAP plane
+local aiCapPlaneName = 'AI_CAP_PLANE_NAME'
+
+-- Function to make the AI plane follow the player and perform CAP
+function followPlayerAndCAP()
+    local playerPlane = Unit.getByName(playerPlaneName)
+    local aiCapPlane = Unit.getByName(aiCapPlaneName)
+
+    if playerPlane and aiCapPlane then
+        local aiCapController = aiCapPlane:getGroup():getController()
+        
+        -- Add waypoints for following the player and performing CAP
+        local waypoints = {
+            [1] = {
+                action = "FROM_TEMPLATE",
+                templateId = "CAP_TEMPLATE_NAME", -- Replace with the actual CAP waypoint template name
+                -- Add other parameters for the first waypoint as needed
+            },
+            [2] = {
+                action = "FROM_TEMPLATE",
+                templateId = "FOLLOW_PLAYER_TEMPLATE_NAME", -- Replace with the actual follow player waypoint template name
+                -- Add other parameters for the second waypoint as needed
+            },
+            -- Add more waypoints as necessary
+        }
+
+        aiCapController:setWaypoints(waypoints)
+        trigger.action.outText("AI CAP plane following player and performing CAP.", 5)
+    else
+        trigger.action.outText("Player plane or AI CAP plane not found.", 5)
+    end
+end
+
+-- Call the function to make the AI plane follow the player and perform CAP
+followPlayerAndCAP()
