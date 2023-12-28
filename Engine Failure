@@ -1,0 +1,17 @@
+-- Replace 'AI_PLANE_NAME' with the actual name of your AI plane
+local aiPlaneName = 'AI_PLANE_NAME'
+
+-- Function to simulate engine failure for the AI plane
+function simulateEngineFailure()
+    local aiPlane = Unit.getByName(aiPlaneName)
+
+    if aiPlane then
+        aiPlane:getController():setEngineFailure(1)  -- 1 indicates a complete engine failure
+        trigger.action.outText("Engine failure simulated on " .. aiPlaneName, 5)
+    else
+        trigger.action.outText("AI plane " .. aiPlaneName .. " not found.", 5)
+    end
+end
+
+-- Call the function to simulate engine failure
+simulateEngineFailure()
